@@ -1,11 +1,11 @@
 resource "aws_key_pair" "SoftLiKey" {
-  key_name = "SoftLiKey"
+  key_name = "SoftLiKey-${var.ENVIRONMENT}"
   public_key = "${file("${var.PATH_TO_PUBLIC_KEY}")}"
 }
 
 resource "aws_instance" "SoftLi" {
   ami = "ami-9887c6e7"
-  instance_type = "t2.micro"
+  instance_type = "${var.INSTANCE_TYPE}"
   key_name = "${aws_key_pair.SoftLiKey.key_name}"
 
     tags {

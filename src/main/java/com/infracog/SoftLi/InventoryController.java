@@ -32,6 +32,15 @@ public class InventoryController {
             return csiID + " " + ctcVersionID + ": " + "not ok";
         }
     }
+    
+    @RequestMapping("/create")
+    public String create(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
+            @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
+            @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
+        sli = new SoftwareLicenseInventory();
+        sli.addRight(csiID, ctcVersionID, Long.parseLong(quantity));
+        return "Added " + csiID + "-" + ctcVersionID + ": " + quantity;
+    }
 
     @PostConstruct
     public void init() {

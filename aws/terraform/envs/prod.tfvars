@@ -1,5 +1,4 @@
-ENVIRONMENT = "DEV"
+ENVIRONMENT = "PROD"
 INSTANCE_USERNAME = "centos"
-INSTANCE_TYPE = "t2.micro"
 PATH_TO_PRIVATE_KEY = "~/.ssh/SoftLi"
 PATH_TO_PUBLIC_KEY = "~/.ssh/SoftLi.pub"
