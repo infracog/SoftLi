@@ -7,13 +7,14 @@ package com.infracog.SoftLi;
 
 import java.util.HashMap;
 
+
 /**
  *
  * @author pmaher
  */
 public class SoftwareLicenseInventory {
 
-    private HashMap<String, SoftwareLicenseRight> map;
+    private final HashMap<String, SoftwareLicenseRight> map;
 
     public SoftwareLicenseInventory() {
         map = new HashMap<>();
@@ -24,17 +25,28 @@ public class SoftwareLicenseInventory {
         map.put(slr.getKey(), slr);
     }
 
+
     public boolean reserveRights(String csiID, String ctcVersionID, long quantity) {
-        boolean availableRights = false;
+        boolean bStatus = false;
+        String status, statusMsg;
         String slrKey = csiID + "-" + ctcVersionID;
         long licenseRights = 0;
         if (map.containsKey(slrKey)) {
-            licenseRights = map.get(slrKey).getQuantity();
-            if (licenseRights >= quantity) {
-                availableRights = true;
+            SoftwareLicenseRight slr = map.get(slrKey);
+            if (slr.reserveRights(quantity)) {
+                status = "OK";
+                statusMsg = "Rights Successfully Assigned";
+                bStatus = true;
+            } else {
+                status = "NOT OK";
+                statusMsg = "Attempt to reserve more rights that are available";
             }
         }
-        return availableRights;
+        return bStatus;
+    }
+
+    public HashMap<String, SoftwareLicenseRight> getSoftwareLicenseRights() {
+        return map;
     }
 
 }
