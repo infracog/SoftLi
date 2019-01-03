@@ -23,30 +23,20 @@ public class InventoryController {
     private final AtomicLong counter = new AtomicLong();
     private SoftwareLicenseInventory sli;
 
+    
     @RequestMapping("/reserve")
     @ResponseBody
     public StatusMessage reserve(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
             @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
             @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
-        if (sli.reserveRights(csiID, ctcVersionID, Long.parseLong(quantity))) {
-            return new StatusMessage(0,
-                    "Successfully reserved " + quantity
-                    + "rights for CSI ID: " + csiID
-                    + ", CTCVersionID: " + ctcVersionID);
-        } else {
-            return new StatusMessage(1,
-                    "Unable to reserved " + quantity
-                    + "rights for CSI ID: " + csiID
-                    + ", CTCVersionID: " + ctcVersionID);
-        }
+        return sli.reserveRights(csiID, ctcVersionID, Long.parseLong(quantity));
     }
 
     @RequestMapping("/create")
-    public String create(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
+    public StatusMessage create(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
             @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
             @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
-        sli.addRight(csiID, ctcVersionID, Long.parseLong(quantity));
-        return "Added " + csiID + "-" + ctcVersionID + ": " + quantity;
+        return sli.addRight(csiID, ctcVersionID, Long.parseLong(quantity));
     }
     
     @RequestMapping("list")

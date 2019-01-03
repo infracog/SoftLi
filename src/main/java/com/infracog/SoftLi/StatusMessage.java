@@ -12,6 +12,7 @@ package com.infracog.SoftLi;
 public class StatusMessage {
     private final int status;
     private final String message;
+    private SoftwareLicenseRight slr;
     
     public int getStatus() {
         return status;
@@ -21,9 +22,24 @@ public class StatusMessage {
         return message;
     }
     
+    public SoftwareLicenseRight getSoftwareLicenseRight() {
+        return slr;
+    }
+    
     public StatusMessage(int status, String message) {
         this.status = status;
         this.message = message;
+        slr = null;
+    }
+    
+        public StatusMessage(int status, String message, SoftwareLicenseRight slr) {
+        this.status = status;
+        this.message = message;
+        this.slr = slr;
+    }
+    
+    public void setSoftwareLicenseRight(SoftwareLicenseRight slr) {
+        this.slr = slr;
     }
     
 }

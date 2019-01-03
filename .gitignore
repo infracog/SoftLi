@@ -32,3 +32,4 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+/nbproject/
