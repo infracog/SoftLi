@@ -5,8 +5,11 @@
  */
 package com.infracog.SoftLi;
 
+import com.infracog.SoftLi.am.SoftwareLicenseRight;
+import com.infracog.SoftLi.am.StatusMessage;
+import com.infracog.SoftLi.am.SoftwareLicenseInventory;
+import com.infracog.SoftLi.am.SoftwareManifestInventory;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,38 +21,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author pmaher
  */
 @RestController
-public class InventoryController {
+public class SoftLiController {
 
-    private final AtomicLong counter = new AtomicLong();
     private SoftwareLicenseInventory sli;
 
+
     
-    @RequestMapping("/reserve")
+    @RequestMapping("/reserveRights")
     @ResponseBody
     public StatusMessage reserve(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
-            @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
-            @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
-        return sli.reserveRights(csiID, ctcVersionID, Long.parseLong(quantity));
+            @RequestParam(value = "imageID") String imageID,
+            @RequestParam(value = "vCPUs") String vCPUs,
+            @RequestParam(value = "ram") String ram,
+            @RequestParam(value = "instances") String instances) {
+        return sli.reserveRights(csiID, imageID,
+                Long.parseLong(vCPUs), Long.parseLong(ram), Integer.parseInt(instances));
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/createRights")
     public StatusMessage create(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
             @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
             @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
         return sli.addRight(csiID, ctcVersionID, Long.parseLong(quantity));
     }
     
-    @RequestMapping("list")
+    @RequestMapping("listRights")
     public HashMap<String, SoftwareLicenseRight> list() {
         return sli.getSoftwareLicenseRights();
     }
 
     @PostConstruct
     public void init() {
-        sli = new SoftwareLicenseInventory();
-        sli.addRight("1", "50", 10);
-        sli.addRight("1", "51", 10);
-        sli.addRight("2", "50", 20);
-        sli.addRight("2", "52", 20);
+        sli = Initializer.getSLI();
     }
 }

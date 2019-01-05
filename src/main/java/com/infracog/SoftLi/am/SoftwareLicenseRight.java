@@ -1,4 +1,4 @@
-package com.infracog.SoftLi;
+package com.infracog.SoftLi.am;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +11,9 @@ package com.infracog.SoftLi;
  */
 public class SoftwareLicenseRight {
 
-    private String csiID;
-    private String ctcVersionID;
-    private long qtyOwned;
+    private final String csiID;
+    private final String ctcVersionID;
+    private final long qtyOwned;
     private long qtyReserved;
     
     public SoftwareLicenseRight(String csiID, String ctcVersionID, long quantity) {
@@ -23,7 +23,7 @@ public class SoftwareLicenseRight {
         qtyReserved = 0;
     }
     
-    public String getKey() {
+    public String generateKey() {
         return csiID + "-" + ctcVersionID;
     }
     
@@ -47,6 +47,13 @@ public class SoftwareLicenseRight {
         boolean status = false;
         if (qtyReserved + quantity <= qtyOwned) {
             qtyReserved += quantity;
+            status = true;
+        }
+        return status;
+    }    
+    public boolean hasAvailableRights(long quantity) {
+        boolean status = false;
+        if (qtyReserved + quantity <= qtyOwned) {
             status = true;
         }
         return status;

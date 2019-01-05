@@ -3,28 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.infracog.SoftLi;
+package com.infracog.SoftLi.am;
 
 /**
  *
  * @author pmaher
  */
 public class StatusMessage {
+    public static final int SUCCESS = 0;
+    public static final int FAILURE = 1;
+
     private final int status;
     private final String message;
     private SoftwareLicenseRight slr;
-    
-    public int getStatus() {
-        return status;
-    }
-    
-    public String getMessage() {
-        return message;
-    }
-    
-    public SoftwareLicenseRight getSoftwareLicenseRight() {
-        return slr;
-    }
     
     public StatusMessage(int status, String message) {
         this.status = status;
@@ -37,9 +28,21 @@ public class StatusMessage {
         this.message = message;
         this.slr = slr;
     }
+        public int getStatus() {
+        return status;
+    }
+    
+    public String getMessage() {
+        return message;
+    }
     
     public void setSoftwareLicenseRight(SoftwareLicenseRight slr) {
         this.slr = slr;
     }
     
+    public SoftwareLicenseRight getSoftwareLicenseRight() {
+        return slr;
+    }
+    
+
 }
