@@ -5,10 +5,10 @@
  */
 package com.infracog.SoftLi;
 
-import com.infracog.SoftLi.am.SoftwareLicenseRight;
+import com.infracog.SoftLi.am.LicenseRight;
 import com.infracog.SoftLi.am.StatusMessage;
-import com.infracog.SoftLi.am.SoftwareLicenseInventory;
-import com.infracog.SoftLi.am.SoftwareManifestInventory;
+import com.infracog.SoftLi.am.LicenseRights;
+import com.infracog.SoftLi.am.Manifests;
 import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 public class SoftLiController {
 
-    private SoftwareLicenseInventory sli;
+    private LicenseRights sli;
 
 
     
@@ -46,12 +46,12 @@ public class SoftLiController {
     }
     
     @RequestMapping("listRights")
-    public HashMap<String, SoftwareLicenseRight> list() {
+    public HashMap<String, LicenseRight> list() {
         return sli.getSoftwareLicenseRights();
     }
 
     @PostConstruct
     public void init() {
-        sli = Initializer.getSLI();
+        sli = Initializer.getLicenseRights();
     }
 }

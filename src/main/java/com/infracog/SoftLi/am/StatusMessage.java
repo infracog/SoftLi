@@ -15,7 +15,7 @@ public class StatusMessage {
 
     private final int status;
     private final String message;
-    private SoftwareLicenseRight slr;
+    private LicenseRight slr;
     
     public StatusMessage(int status, String message) {
         this.status = status;
@@ -23,7 +23,7 @@ public class StatusMessage {
         slr = null;
     }
     
-        public StatusMessage(int status, String message, SoftwareLicenseRight slr) {
+        public StatusMessage(int status, String message, LicenseRight slr) {
         this.status = status;
         this.message = message;
         this.slr = slr;
@@ -36,11 +36,11 @@ public class StatusMessage {
         return message;
     }
     
-    public void setSoftwareLicenseRight(SoftwareLicenseRight slr) {
+    public void setSoftwareLicenseRight(LicenseRight slr) {
         this.slr = slr;
     }
     
-    public SoftwareLicenseRight getSoftwareLicenseRight() {
+    public LicenseRight getSoftwareLicenseRight() {
         return slr;
     }
     

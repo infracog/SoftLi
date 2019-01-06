@@ -9,14 +9,14 @@ package com.infracog.SoftLi.am;
  *
  * @author pmaher
  */
-public class SoftwareLicenseRight {
+public class LicenseRight {
 
     private final String csiID;
     private final String ctcVersionID;
     private final long qtyOwned;
     private long qtyReserved;
     
-    public SoftwareLicenseRight(String csiID, String ctcVersionID, long quantity) {
+    public LicenseRight(String csiID, String ctcVersionID, long quantity) {
         this.csiID = csiID;
         this.ctcVersionID = ctcVersionID;
         this.qtyOwned = quantity;

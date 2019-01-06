@@ -5,10 +5,12 @@
  */
 package com.infracog.SoftLi;
 
-import com.infracog.SoftLi.am.SoftwareLicenseInventory;
-import com.infracog.SoftLi.am.SoftwareLicenseMetricLookup;
-import com.infracog.SoftLi.am.SoftwareLicenseModel;
-import com.infracog.SoftLi.am.SoftwareManifestInventory;
+import com.infracog.SoftLi.am.LicenseRights;
+import com.infracog.SoftLi.am.LicenseModel;
+import com.infracog.SoftLi.am.LicenseModels;
+import com.infracog.SoftLi.am.LicenseMetric;
+import com.infracog.SoftLi.am.Manifests;
+import com.infracog.SoftLi.am.SoftwareCategory;
 
 /**
  *
@@ -30,34 +32,52 @@ public class Initializer {
 // I-1  51, 53, *50*
 // I-2  51, 53, 52
 // I-3  51, 53, *50*, *54*
-    public static SoftwareManifestInventory getSMI() {
-        SoftwareLicenseMetricLookup l = new SoftwareLicenseMetricLookup();
-        l.addReference("50", SoftwareLicenseModel.VCPU);
-        l.addReference("51", SoftwareLicenseModel.INSTANCE);
-        l.addReference("52", SoftwareLicenseModel.INSTANCE);
-        l.addReference("53", SoftwareLicenseModel.INSTANCE);
-        l.addReference("54", SoftwareLicenseModel.VCPU);
+    public static LicenseModels getLicenseModels() {
+        LicenseModels l = new LicenseModels();
+        l.addModel(new LicenseModel(
+                "50", 
+                new LicenseMetric(LicenseMetric.VCPU), 
+                new SoftwareCategory(SoftwareCategory.APPLICATION)));
+        l.addModel(new LicenseModel(
+                "51", 
+                new LicenseMetric(LicenseMetric.INSTANCE), 
+                new SoftwareCategory(SoftwareCategory.INFRASTRUCTURE)));
+        l.addModel(new LicenseModel(
+                "52", 
+                new LicenseMetric(LicenseMetric.INSTANCE), 
+                new SoftwareCategory(SoftwareCategory.APPLICATION)));
+        l.addModel(new LicenseModel(
+                "53", 
+                new LicenseMetric(LicenseMetric.INSTANCE), 
+                new SoftwareCategory(SoftwareCategory.INFRASTRUCTURE)));
+        l.addModel(new LicenseModel(
+                "54", 
+                new LicenseMetric(LicenseMetric.VCPU), 
+                new SoftwareCategory(SoftwareCategory.APPLICATION)));
+        return l;
+    }
         
-        SoftwareManifestInventory manifest = new SoftwareManifestInventory(l);
-        manifest.addSoftwareID("I-1", "50");
-        manifest.addSoftwareID("I-1", "51");
-        manifest.addSoftwareID("I-1", "53");
-        manifest.addSoftwareID("I-2", "51");
-        manifest.addSoftwareID("I-2", "52");
-        manifest.addSoftwareID("I-2", "53");
-        manifest.addSoftwareID("I-3", "50");
-//        manifest.addSoftwareID("I-3", "51");
-//        manifest.addSoftwareID("I-3", "53");
-        manifest.addSoftwareID("I-3", "54");
-        return manifest;
+    public static Manifests getManifests() {
+        Manifests manifests = new Manifests(getLicenseModels());
+        manifests.addSoftwareID("I-1", "50");
+        manifests.addSoftwareID("I-1", "51");
+        manifests.addSoftwareID("I-1", "53");
+        manifests.addSoftwareID("I-2", "51");
+        manifests.addSoftwareID("I-2", "52");
+        manifests.addSoftwareID("I-2", "53");
+        manifests.addSoftwareID("I-3", "50");
+        manifests.addSoftwareID("I-3", "51");
+        manifests.addSoftwareID("I-3", "53");
+        manifests.addSoftwareID("I-3", "54");
+        return manifests;
     }
 // Rights
 // 1    50: 32  
 // 2    50: 16      54: 16
 // 3    52:  3
 
-    public static SoftwareLicenseInventory getSLI() {
-        SoftwareLicenseInventory sli = new SoftwareLicenseInventory();
+    public static LicenseRights getLicenseRights() {
+        LicenseRights sli = new LicenseRights();
         sli.addRight("1", "50", 32);
         sli.addRight("2", "50", 16);
         sli.addRight("2", "54", 16);

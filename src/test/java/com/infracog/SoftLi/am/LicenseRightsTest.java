@@ -5,9 +5,6 @@
  */
 package com.infracog.SoftLi.am;
 
-import com.infracog.SoftLi.am.SoftwareLicenseRight;
-import com.infracog.SoftLi.am.StatusMessage;
-import com.infracog.SoftLi.am.SoftwareLicenseInventory;
 import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,30 +17,57 @@ import static org.junit.Assert.*;
  *
  * @author pmaher
  */
-public class SoftwareLicenseInventoryTest {
-    
-    SoftwareLicenseInventory sli;
-    
-    public SoftwareLicenseInventoryTest() {
+public class LicenseRightsTest {
+
+    LicenseRights sli;
+    LicenseModels models;
+
+    public LicenseRightsTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        sli = new SoftwareLicenseInventory();
+        sli = new LicenseRights();
         sli.addRight("100", "50010", 20);
         sli.addRight("200", "50010", 20);
+
+        models = new LicenseModels();
+        models.addModel(new LicenseModel(
+                "50",
+                new LicenseMetric(LicenseMetric.VCPU),
+                new SoftwareCategory(SoftwareCategory.APPLICATION)));
+        models.addModel(new LicenseModel(
+                "51",
+                new LicenseMetric(LicenseMetric.INSTANCE),
+                new SoftwareCategory(SoftwareCategory.INFRASTRUCTURE)));
+
     }
-    
+
     @After
     public void tearDown() {
+    }
+    
+    @Test 
+    public void testModels() {
+        System.out.println("testModels");
+        LicenseModel model = models.getModel("50");
+        assertEquals("50", model.getID());
+        assertEquals(LicenseMetric.VCPU, model.getMetric().getMetricValue());
+        assertEquals(new SoftwareCategory(SoftwareCategory.APPLICATION).getCategory(), 
+                model.getCategory().getCategory());
+        model = models.getModel("51");
+        assertEquals("51", model.getID());
+        assertEquals(LicenseMetric.INSTANCE, model.getMetric().getMetricValue());
+        assertEquals(new SoftwareCategory(SoftwareCategory.INFRASTRUCTURE).getCategory(), 
+                model.getCategory().getCategory());
     }
 
     @Test
@@ -54,7 +78,7 @@ public class SoftwareLicenseInventoryTest {
         long quantity = 20L;
         String expResult = csiID + "-" + ctcVersionID;
         StatusMessage result = sli.addRight(csiID, ctcVersionID, quantity);
-        SoftwareLicenseRight slr = result.getSoftwareLicenseRight();
+        LicenseRight slr = result.getSoftwareLicenseRight();
         assertEquals(expResult, slr.generateKey());
     }
 
@@ -70,7 +94,6 @@ public class SoftwareLicenseInventoryTest {
 ////        assertEquals(expResult, result);
 ////        fail("The test case is a prototype.");
 //    }
-
 //    @Test
 //    public void testReserveRightsFail() {
 //        System.out.println("reserveRightsFail");
@@ -83,14 +106,13 @@ public class SoftwareLicenseInventoryTest {
 ////        assertEquals(expResult, result);
 ////        fail("The test case is a prototype.");
 //    }
-
     @Test
     public void testGetSoftwareLicenseRights() {
         System.out.println("getSoftwareLicenseRights");
-        HashMap<String, SoftwareLicenseRight> expResult = null;
-        HashMap<String, SoftwareLicenseRight> result = sli.getSoftwareLicenseRights();
+        HashMap<String, LicenseRight> expResult = null;
+        HashMap<String, LicenseRight> result = sli.getSoftwareLicenseRights();
         assertEquals(2, result.size());
         System.out.println("Rights:\n" + result);
     }
-    
+
 }

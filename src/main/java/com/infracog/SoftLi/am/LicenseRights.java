@@ -13,21 +13,23 @@ import java.util.Set;
  *
  * @author pmaher
  */
-public class SoftwareLicenseInventory {
+public class LicenseRights {
 
     // All software license rights, indexed by the key: CSI ID - CTC Version ID
-    private final HashMap<String, SoftwareLicenseRight> licenseRights;
+    private final HashMap<String, LicenseRight> rights;
     // The manifest contains the list of CTC Version IDs associated with an Image ID
-    private final SoftwareManifestInventory manifest;
+    private final Manifests manifests;
+    private final LicenseModels models;
 
-    public SoftwareLicenseInventory() {
-        licenseRights = new HashMap<>();
-        manifest = Initializer.getSMI();
+    public LicenseRights() {
+        rights = new HashMap<>();
+        manifests = Initializer.getManifests();  // temporary measure
+        models = Initializer.getLicenseModels();
     }
 
     public StatusMessage addRight(String csiID, String ctcVersionID, long quantity) {
-        SoftwareLicenseRight slr = new SoftwareLicenseRight(csiID, ctcVersionID, quantity);
-        licenseRights.put(slr.generateKey(), slr);
+        LicenseRight slr = new LicenseRight(csiID, ctcVersionID, quantity);
+        rights.put(slr.generateKey(), slr);
         return new StatusMessage(StatusMessage.SUCCESS, "Software License Right created.", slr);
     }
 
@@ -38,35 +40,37 @@ public class SoftwareLicenseInventory {
         String slrKey;
         long quantity;
         // From the image id, check the manifest and get all the CTC Version IDs associated with the image
-        Set<String> ctcVersionIDs = manifest.getSoftwareIDs(imageID);
+        Set<String> ctcVersionIDs = manifests.getManifest(imageID).getCtcVersionIDs();
         if (!ctcVersionIDs.isEmpty()) {
             boolean rightsAvailable = true;
             statusMsg = csiID + ":";
             // First check each ctcVersionID to see if the CSI has enough rights to set
             for (String ctcVersionID : ctcVersionIDs) {
                 slrKey = csiID + "-" + ctcVersionID;
-                if (licenseRights.containsKey(slrKey)) {
+                if (rights.containsKey(slrKey)) {
                     //
-                    SoftwareLicenseRight slr = licenseRights.get(slrKey);
-                    switch (manifest.getSoftwareLicenseMetric(ctcVersionID)) {
-                        case SoftwareLicenseModel.INSTANCE:
+                    LicenseRight slr = rights.get(slrKey);
+                    switch (models.getModel(ctcVersionID).getMetric().getMetricValue()) {
+                        case LicenseMetric.INSTANCE:
                             quantity = instances;
                             break;
-                        case SoftwareLicenseModel.RAM:
+                        case LicenseMetric.RAM:
                             quantity = ram;
                             break;
-                        case SoftwareLicenseModel.VCPU:
+                        case LicenseMetric.VCPU:
                             quantity = vCPU;
                             break;
                         default:
                             quantity = -1;  // TODO: Handle this case
                     }
-                    if (!slr.hasAvailableRights(quantity)) {
+                    if (models.getModel(ctcVersionID).getCategory().isEqual(SoftwareCategory.APPLICATION)
+                            && !slr.hasAvailableRights(quantity)) {
                         rightsAvailable = false;
                     }
                     statusMsg = statusMsg.concat("{  ctcVersionID: " + ctcVersionID
                             + "  qtyOwned: " + slr.getQuantityOwned()
                             + "  qtyInUse: " + slr.getQuantityReserved()
+                            + "  category: " + models.getModel(ctcVersionID).getCategory().getCategory()
                             + "}");
                 } else {
                     // !licenseRights.containsKey(slrKey)
@@ -81,24 +85,27 @@ public class SoftwareLicenseInventory {
                 statusMsg = " { CSI ID : " + csiID + " ";
                 for (String ctcVersionID : ctcVersionIDs) {
                     slrKey = csiID + "-" + ctcVersionID;
-                    SoftwareLicenseRight slr = licenseRights.get(slrKey);
-                    switch (manifest.getSoftwareLicenseMetric(ctcVersionID)) {
-                        case SoftwareLicenseModel.INSTANCE:
+                    LicenseRight slr = rights.get(slrKey);
+                    switch (models.getModel(ctcVersionID).getMetric().getMetricValue()) {
+                        case LicenseMetric.INSTANCE:
                             quantity = instances;
                             break;
-                        case SoftwareLicenseModel.RAM:
+                        case LicenseMetric.RAM:
                             quantity = ram;
                             break;
-                        case SoftwareLicenseModel.VCPU:
+                        case LicenseMetric.VCPU:
                             quantity = vCPU;
                             break;
                         default:
                             quantity = -1;  // TODO: Handle this case
                     }
-                    slr.reserveRights(quantity);
+                    if (models.getModel(ctcVersionID).getCategory().isEqual(SoftwareCategory.APPLICATION))  {
+                        slr.reserveRights(quantity);
+                    }
                     statusMsg = statusMsg.concat("{  ctcVersionID: " + ctcVersionID
                             + "  qtyOwned: " + slr.getQuantityOwned()
                             + "  qtyInUse: " + slr.getQuantityReserved()
+                            + "  category: " + models.getModel(ctcVersionID).getCategory().getCategory()
                             + "}");
                 }
                 m = new StatusMessage(StatusMessage.SUCCESS, "Rights successfully assigned " + statusMsg);
@@ -113,8 +120,8 @@ public class SoftwareLicenseInventory {
         return m;
     }
 
-    public HashMap<String, SoftwareLicenseRight> getSoftwareLicenseRights() {
-        return licenseRights;
+    public HashMap<String, LicenseRight> getSoftwareLicenseRights() {
+        return rights;
     }
 
 }
