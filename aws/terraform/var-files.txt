@@ -1,1 +1,0 @@
--var-file="~/envs/SoftLi-aws-dev.tfvars" -var-file="./envs/dev.tfvars"

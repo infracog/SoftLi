@@ -1,10 +1,21 @@
-variable "ENVIRONMENT" {}
-variable "AWS_ACCESS_KEY" {}
-variable "AWS_SECRET_KEY" {}
-variable "PATH_TO_PRIVATE_KEY" {}
-variable "PATH_TO_PUBLIC_KEY" {}
-variable "INSTANCE_USERNAME" {}
-variable "INSTANCE_TYPE" {}
+variable "PATH_TO_PRIVATE_KEY" {
+  default = "~/.ssh/SoftLi"
+}
+variable "PATH_TO_PUBLIC_KEY" {
+  default = "~/.ssh/SoftLi.pub"
+}
+variable "INSTANCE_USERNAME" {
+  default = "centos"
+}
+variable "INSTANCE_TYPE" {
+  type = "map"
+
+  default = {
+    dev = "t2.nano"
+    stg = "t2.micro"
+    prd = "t2.small"
+  }
+}
 variable "SSH_CIDR" {
   default = "47.187.108.244/32"
 }
@@ -18,8 +29,3 @@ variable "AWS_AZ" {
 variable "DOMAIN" {
   default = "infracog.com"
 }
-
-
-  
-
-
