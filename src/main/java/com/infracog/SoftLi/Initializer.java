@@ -59,16 +59,16 @@ public class Initializer {
         
     public static Manifests getManifests() {
         Manifests manifests = new Manifests(getLicenseModels());
-        manifests.addSoftwareID("I-1", "50");
-        manifests.addSoftwareID("I-1", "51");
-        manifests.addSoftwareID("I-1", "53");
-        manifests.addSoftwareID("I-2", "51");
-        manifests.addSoftwareID("I-2", "52");
-        manifests.addSoftwareID("I-2", "53");
-        manifests.addSoftwareID("I-3", "50");
-        manifests.addSoftwareID("I-3", "51");
-        manifests.addSoftwareID("I-3", "53");
-        manifests.addSoftwareID("I-3", "54");
+        manifests.addSwReleaseID("I-1", "50");
+        manifests.addSwReleaseID("I-1", "51");
+        manifests.addSwReleaseID("I-1", "53");
+        manifests.addSwReleaseID("I-2", "51");
+        manifests.addSwReleaseID("I-2", "52");
+        manifests.addSwReleaseID("I-2", "53");
+        manifests.addSwReleaseID("I-3", "50");
+        manifests.addSwReleaseID("I-3", "51");
+        manifests.addSwReleaseID("I-3", "53");
+        manifests.addSwReleaseID("I-3", "54");
         return manifests;
     }
 // Rights

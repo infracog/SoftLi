@@ -8,7 +8,6 @@ package com.infracog.SoftLi;
 import com.infracog.SoftLi.am.LicenseRight;
 import com.infracog.SoftLi.am.StatusMessage;
 import com.infracog.SoftLi.am.LicenseRights;
-import com.infracog.SoftLi.am.Manifests;
 import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,35 +22,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 public class SoftLiController {
 
-    private LicenseRights sli;
+    private LicenseRights licenseRights;
 
 
     
     @RequestMapping("/reserveRights")
     @ResponseBody
-    public StatusMessage reserve(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
+    public StatusMessage reserve(@RequestParam(value = "appID", defaultValue = "0") String appID,
             @RequestParam(value = "imageID") String imageID,
             @RequestParam(value = "vCPUs") String vCPUs,
             @RequestParam(value = "ram") String ram,
             @RequestParam(value = "instances") String instances) {
-        return sli.reserveRights(csiID, imageID,
+        return licenseRights.reserveRights(appID, imageID,
                 Long.parseLong(vCPUs), Long.parseLong(ram), Integer.parseInt(instances));
     }
 
     @RequestMapping("/createRights")
-    public StatusMessage create(@RequestParam(value = "csiID", defaultValue = "0") String csiID,
-            @RequestParam(value = "ctcVersionID", defaultValue = "0") String ctcVersionID,
+    public StatusMessage create(@RequestParam(value = "appID", defaultValue = "0") String appID,
+            @RequestParam(value = "swReleaseID", defaultValue = "0") String swReleaseID,
             @RequestParam(value = "quantity", defaultValue = "0") String quantity) {
-        return sli.addRight(csiID, ctcVersionID, Long.parseLong(quantity));
+        return licenseRights.addRight(appID, swReleaseID, Long.parseLong(quantity));
     }
     
     @RequestMapping("listRights")
     public HashMap<String, LicenseRight> list() {
-        return sli.getSoftwareLicenseRights();
+        return licenseRights.getSoftwareLicenseRights();
     }
 
     @PostConstruct
     public void init() {
-        sli = Initializer.getLicenseRights();
+        licenseRights = Initializer.getLicenseRights();
     }
 }

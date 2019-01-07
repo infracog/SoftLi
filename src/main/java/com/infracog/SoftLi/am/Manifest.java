@@ -15,20 +15,20 @@ import java.util.Set;
 public class Manifest {
 
     private final String imageID;
-    private final Set<String> ctcVersionIDs;
+    private final Set<String> swReleaseIDs;
 
-    public Manifest(String imageID, String ctcVersionID) {
+    public Manifest(String imageID, String swReleaseID) {
         this.imageID = imageID;
-        ctcVersionIDs = new HashSet<>();
-        ctcVersionIDs.add(ctcVersionID);
+        swReleaseIDs = new HashSet<>();
+        swReleaseIDs.add(swReleaseID);
     }
 
-    public void addCtcVersionID(String ctcVersionID) {
-        ctcVersionIDs.add(ctcVersionID);
+    public void addSwReleaseID(String swReleaseID) {
+        swReleaseIDs.add(swReleaseID);
     }
     
-    public Set<String> getCtcVersionIDs() {
-        return ctcVersionIDs;
+    public Set<String> getSwReleaseIDs() {
+        return swReleaseIDs;
     }
 
 }

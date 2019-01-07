@@ -21,11 +21,11 @@ public class Manifests {
         this.lookup = lookup;
     }
     
-    public void addSoftwareID(String imageID, String ctcVersionID) {
+    public void addSwReleaseID(String imageID, String swReleaseID) {
         if (manifests.containsKey(imageID)) {
-            manifests.get(imageID).addCtcVersionID(ctcVersionID);
+            manifests.get(imageID).addSwReleaseID(swReleaseID);
         } else {
-            manifests.put(imageID, new Manifest(imageID, ctcVersionID));
+            manifests.put(imageID, new Manifest(imageID, swReleaseID));
         }
     }
     
@@ -33,11 +33,8 @@ public class Manifests {
         return manifests.get(imageID);
     }
     
-    public Set<String> getCtcVersionIds(String imageID) {
-        return manifests.get(imageID).getCtcVersionIDs();
+    public Set<String> getSwReleaseIds(String imageID) {
+        return manifests.get(imageID).getSwReleaseIDs();
     }
     
-//    public String getSoftwareLicenseMetric(String ctcVersionID) {
-//        return lookup.getLicenseMetric(ctcVersionID);
-//    }
 }

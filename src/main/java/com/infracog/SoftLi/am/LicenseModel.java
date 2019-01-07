@@ -25,11 +25,11 @@ public class LicenseModel {
         return id;
     }
     
-    public LicenseMetric getMetric() {
+    public LicenseMetric getLicenseMetric() {
         return metric;
     }
     
-    public SoftwareCategory getCategory() {
+    public SoftwareCategory getSoftwareCategory() {
         return category;
     }
     

@@ -11,28 +11,28 @@ package com.infracog.SoftLi.am;
  */
 public class LicenseRight {
 
-    private final String csiID;
-    private final String ctcVersionID;
+    private final String appID;
+    private final String swReleaseID;
     private final long qtyOwned;
     private long qtyReserved;
     
-    public LicenseRight(String csiID, String ctcVersionID, long quantity) {
-        this.csiID = csiID;
-        this.ctcVersionID = ctcVersionID;
+    public LicenseRight(String appID, String swReleaseID, long quantity) {
+        this.appID = appID;
+        this.swReleaseID = swReleaseID;
         this.qtyOwned = quantity;
         qtyReserved = 0;
     }
     
     public String generateKey() {
-        return csiID + "-" + ctcVersionID;
+        return appID + "-" + swReleaseID;
     }
     
-    public String getCsiID() {
-        return csiID;
+    public String getAppID() {
+        return appID;
     }
     
-    public String getCtcVersionID() {
-        return ctcVersionID;
+    public String getSwReleaseID() {
+        return swReleaseID;
     }
     
     public long getQuantityOwned() {
