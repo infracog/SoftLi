@@ -1,7 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package com.infracog.SoftLi.am;
 
@@ -49,36 +59,32 @@ public class LicenseRights {
                 slrKey = appID + "-" + swReleaseID;
                 if (rights.containsKey(slrKey)) {
                     LicenseRight slr = rights.get(slrKey);
-                    switch (models.getModel(swReleaseID).getLicenseMetric().getMetricValue()) {
-                        case LicenseMetric.INSTANCE:
-                            quantity = instances;
-                            break;
-                        case LicenseMetric.RAM:
-                            quantity = ram;
-                            break;
-                        case LicenseMetric.VCPU:
-                            quantity = vCPU;
-                            break;
-                        default:
-                            quantity = -1;  // TODO: Handle this case
+                    if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.INSTANCE)) {
+                        quantity = instances;
+                    } else if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.RAM)) {
+                        quantity = ram;
+                    } else if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.VCPU)) {
+                        quantity = vCPU;
+                    } else {
+                        quantity = -1;   // TODO: Handle this case
                     }
+
                     if (!slr.hasAvailableRights(quantity)) {
                         rightsAvailable = false;
                     }
                     statusMsg = statusMsg.concat("{  swReleaseID: " + swReleaseID
                             + "  qtyOwned: " + slr.getQuantityOwned()
                             + "  qtyInUse: " + slr.getQuantityReserved()
-                            + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().getCategory()
+                            + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().toString()
                             + "}");
-                    System.out.println("Rights Available: " + rightsAvailable + " Status Message: " + statusMsg);
                 } else {
                     // !licenseRights.containsKey(slrKey)
-                    if (models.getModel(swReleaseID).getSoftwareCategory().isEqual(SoftwareCategory.APPLICATION)) {
+                    if (models.getModel(swReleaseID).getSoftwareCategory().equals(SoftwareCategory.APPLICATION)) {
                         rightsAvailable = false;
                     }
                     statusMsg = statusMsg.concat("{  swReleaseID: " + swReleaseID
                             + "  qtyOwned: 0"
-                            + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().getCategory()
+                            + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().toString()
                             + "}");
                 }
             }
@@ -89,29 +95,24 @@ public class LicenseRights {
                     slrKey = appID + "-" + swReleaseID;
                     if (rights.containsKey(slrKey)) {
                         LicenseRight slr = rights.get(slrKey);
-                        switch (models.getModel(swReleaseID).getLicenseMetric().getMetricValue()) {
-                            case LicenseMetric.INSTANCE:
-                                quantity = instances;
-                                break;
-                            case LicenseMetric.RAM:
-                                quantity = ram;
-                                break;
-                            case LicenseMetric.VCPU:
-                                quantity = vCPU;
-                                break;
-                            default:
-                                quantity = -1;  // TODO: Handle this case
-                        }
-                        if (models.getModel(swReleaseID).getSoftwareCategory().isEqual(SoftwareCategory.APPLICATION)) {
+                    if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.INSTANCE)) {
+                        quantity = instances;
+                    } else if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.RAM)) {
+                        quantity = ram;
+                    } else if (models.getModel(swReleaseID).getLicenseMetric().equals(LicenseMetric.VCPU)) {
+                        quantity = vCPU;
+                    } else {
+                        quantity = -1;   // TODO: Handle this case
+                    }
+                        if (models.getModel(swReleaseID).getSoftwareCategory().equals(SoftwareCategory.APPLICATION)) {
                             slr.reserveRights(quantity);
                         }
                         statusMsg = statusMsg.concat("{  swReleaseID: " + swReleaseID
                                 + "  qtyOwned: " + slr.getQuantityOwned()
                                 + "  qtyInUse: " + slr.getQuantityReserved()
-                                + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().getCategory()
+                                + "  category: " + models.getModel(swReleaseID).getSoftwareCategory().toString()
                                 + "}");
                     }
-                    System.out.println("Status Message: " + statusMsg);
                 }
                 m = new StatusMessage(StatusMessage.SUCCESS, "Rights successfully assigned " + statusMsg);
             } else {

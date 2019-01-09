@@ -1,36 +1,34 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
+
 package com.infracog.SoftLi.am;
+
+import com.infracog.SoftLi.utils.ConstType;
 
 /**
  *
  * @author pmaher
  */
-public class SoftwareCategory {
-    public static final int APPLICATION = 0;
-    public static final int INFRASTRUCTURE = 1;
-    
-    private final int category;
-    
-    public SoftwareCategory(int category) {
-        this.category = category;
-    }
-    
-    public boolean isEqual(int category) {
-        return this.category == category;
-    }
-    
-    public String getCategory() {
-        switch (category) {
-            case SoftwareCategory.APPLICATION:
-                return "Application";
-            case SoftwareCategory.INFRASTRUCTURE:
-                return "Infrastructure";
-        }
-        return "Unknown";
-    }
-    
+public class SoftwareCategory extends ConstType {
+
+    protected SoftwareCategory (int value, String desc) {
+        super (value, desc);
+    }    
+
+    public static final SoftwareCategory APPLICATION = new SoftwareCategory(0, "Application");
+    public static final SoftwareCategory INFRASTRUCTURE = new SoftwareCategory(1, "Infrastructure");
 }
