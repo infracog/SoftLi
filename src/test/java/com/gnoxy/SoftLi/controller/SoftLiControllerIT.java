@@ -57,7 +57,6 @@ public class SoftLiControllerIT {
 
     @Before
     public void setup() throws Exception {
-        System.out.println("IT Test");
         this.mockMvc = standaloneSetup(this.softLiController).build();// Standalone context
 
         // mockMvc = MockMvcBuilders.webAppContextSetup(wac)
@@ -65,10 +64,11 @@ public class SoftLiControllerIT {
     }
 
     @Test
-    public void testSearchSync() throws Exception {
+    public void testListRights() throws Exception {
+        System.out.println("Testing /listRights");
         mockMvc.perform(get("/listRights").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.*.title", hasItem(is("Hokuto no Ken"))));
+                .andExpect(jsonPath("*.swReleaseID", hasItem(is("54"))));
     }
 
 //    @Test
