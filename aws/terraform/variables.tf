@@ -27,5 +27,5 @@ variable "AWS_AZ" {
   default = "us-east-1a"
 }
 variable "DOMAIN" {
-  default = "infracog.com"
+  default = "gnoxy.com"
 }

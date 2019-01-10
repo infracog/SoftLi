@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,23 @@
  */
 
 
-package com.infracog.SoftLi;
+package com.gnoxy.SoftLi.am;
 
+import com.gnoxy.SoftLi.utils.ConstType;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+/**
+ *
+ * @author Patrick Maher<dev@gnoxy.com>
+ */
 
-@SpringBootApplication
-public class SoftLiApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(SoftLiApplication.class, args);
+public class LicenseMetric extends ConstType {
+    
+    protected LicenseMetric (int value, String desc) {
+        super (value, desc);
     }
-
+    
+    public static final LicenseMetric VCPU = new LicenseMetric(0, "vCPU");
+    public static final LicenseMetric RAM = new LicenseMetric(1, "RAM");
+    public static final LicenseMetric INSTANCE = new LicenseMetric(2, "Instance");
+    
 }

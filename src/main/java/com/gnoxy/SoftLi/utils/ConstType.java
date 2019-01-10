@@ -1,4 +1,4 @@
-package com.infracog.SoftLi.utils;
+package com.gnoxy.SoftLi.utils;
 
 import java.util.Collections;
 import java.util.HashMap;

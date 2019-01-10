@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,20 @@
  */
 
 
-package com.infracog.SoftLi.am;
+package com.gnoxy.SoftLi.am;
 
-import com.infracog.SoftLi.utils.ConstType;
+import com.gnoxy.SoftLi.utils.ConstType;
 
 /**
  *
- * @author pmaher
+ * @author Patrick Maher<dev@gnoxy.com>
  */
+public class SoftwareCategory extends ConstType {
 
-public class LicenseMetric extends ConstType {
-    
-    protected LicenseMetric (int value, String desc) {
+    protected SoftwareCategory (int value, String desc) {
         super (value, desc);
-    }
-    
-    public static final LicenseMetric VCPU = new LicenseMetric(0, "vCPU");
-    public static final LicenseMetric RAM = new LicenseMetric(1, "RAM");
-    public static final LicenseMetric INSTANCE = new LicenseMetric(2, "Instance");
-    
+    }    
+
+    public static final SoftwareCategory APPLICATION = new SoftwareCategory(0, "Application");
+    public static final SoftwareCategory INFRASTRUCTURE = new SoftwareCategory(1, "Infrastructure");
 }

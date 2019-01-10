@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 
 
-package com.infracog.SoftLi.am;
+package com.gnoxy.SoftLi.am;
 
-import com.infracog.SoftLi.Initializer;
+import com.gnoxy.SoftLi.Initializer;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author pmaher
+ * @author Patrick Maher<dev@gnoxy.com>
  */
 public class LicenseModelsTest {
 

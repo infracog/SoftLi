@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
+package com.gnoxy.SoftLi;
 
-package com.infracog.SoftLi.am;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.infracog.SoftLi.utils.ConstType;
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SoftLiApplicationTests {
 
-/**
- *
- * @author pmaher
- */
-public class SoftwareCategory extends ConstType {
+	@Test
+	public void contextLoads() {
+	}
 
-    protected SoftwareCategory (int value, String desc) {
-        super (value, desc);
-    }    
-
-    public static final SoftwareCategory APPLICATION = new SoftwareCategory(0, "Application");
-    public static final SoftwareCategory INFRASTRUCTURE = new SoftwareCategory(1, "Infrastructure");
 }
+

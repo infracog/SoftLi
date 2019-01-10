@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,18 @@
  */
 
 
-package com.infracog.SoftLi;
+package com.gnoxy.SoftLi;
 
-import com.infracog.SoftLi.am.LicenseRights;
-import com.infracog.SoftLi.am.LicenseModel;
-import com.infracog.SoftLi.am.LicenseModels;
-import com.infracog.SoftLi.am.LicenseMetric;
-import com.infracog.SoftLi.am.Manifests;
-import com.infracog.SoftLi.am.SoftwareCategory;
+import com.gnoxy.SoftLi.am.LicenseRights;
+import com.gnoxy.SoftLi.am.LicenseModel;
+import com.gnoxy.SoftLi.am.LicenseModels;
+import com.gnoxy.SoftLi.am.LicenseMetric;
+import com.gnoxy.SoftLi.am.Manifests;
+import com.gnoxy.SoftLi.am.SoftwareCategory;
 
 /**
  *
- * @author pmaher
+ * @author Patrick Maher<dev@gnoxy.com>
  */
 public class Initializer {
 

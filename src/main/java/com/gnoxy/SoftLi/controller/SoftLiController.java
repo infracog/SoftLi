@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 
 
-package com.infracog.SoftLi;
+package com.gnoxy.SoftLi.controller;
 
-import com.infracog.SoftLi.am.LicenseRight;
-import com.infracog.SoftLi.am.StatusMessage;
-import com.infracog.SoftLi.am.LicenseRights;
+import com.gnoxy.SoftLi.Initializer;
+import com.gnoxy.SoftLi.am.LicenseRight;
+import com.gnoxy.SoftLi.am.StatusMessage;
+import com.gnoxy.SoftLi.am.LicenseRights;
 import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author pmaher
+ * @author Patrick Maher<dev@gnoxy.com>
  */
 @RestController
 public class SoftLiController {
@@ -56,7 +57,7 @@ public class SoftLiController {
         return licenseRights.addRight(appID, swReleaseID, Long.parseLong(quantity));
     }
     
-    @RequestMapping("listRights")
+    @RequestMapping("/listRights")
     public HashMap<String, LicenseRight> list() {
         return licenseRights.getSoftwareLicenseRights();
     }

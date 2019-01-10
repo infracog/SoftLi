@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  */
 
 
-package com.infracog.SoftLi.am;
+package com.gnoxy.SoftLi.am;
 
 /**
  *
- * @author pmaher
+ *  * @author Patrick Maher<dev@gnoxy.com>
  * 
  */
 public class LicenseModel {

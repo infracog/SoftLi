@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Patrick Maher<dev@infracog.com>.
+ * Copyright 2019 Patrick Maher<dev@gnoxy.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.infracog.SoftLi;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+package com.gnoxy.SoftLi;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class SoftLiApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SoftLiApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SoftLiApplication.class, args);
+    }
 
 }
-
